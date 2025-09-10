@@ -4,7 +4,7 @@ const app = express();
 
 
 
-app.use(helmet.hidePoweredBy()); //this is hides origin powdered by in header section.
+/*app.use(helmet.hidePoweredBy()); //this is hides origin powdered by in header section.
 app.use(helmet.frameguard({action: 'deny'}));
 app.use(helmet.xssFilter());
 app.use(helmet.noSniff());
@@ -21,7 +21,19 @@ app.use(
       scriptSrc: ["'self'", 'trusted-cdn.com'],
     }
   })
-);
+); */
+app.use(helmet({
+  frameguard: {         // configure
+    action: 'deny'
+  },
+  contentSecurityPolicy: {    // enable and configure
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ['style.com'],
+    }
+  },
+  dnsPrefetchControl: false     // disable
+}));
 
 
 
