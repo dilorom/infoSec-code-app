@@ -6,19 +6,12 @@ const app = express();
 
 app.use(helmet.hidePoweredBy()); //this is hides origin powdered by in header section.
 app.use(helmet.frameguard({action: 'deny'}));
-
-
-
-
-
-
-
-
 app.use(helmet.xssFilter());
+app.use(helmet.noSniff());
 
-app.get('/', (req, res) => {
-    res.send('<h1>Hello World</h1>');
-});
+app.use(helmet.ieNoOpen());
+const timeInSeconds = 90 * 24 * 60 * 60;
+app.use(helmet.hsts({maxAge: timeInSeconds, force: true}));
 
 
 
