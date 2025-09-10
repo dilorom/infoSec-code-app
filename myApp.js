@@ -14,6 +14,12 @@ app.use(helmet.frameguard({action: 'deny'}));
 
 
 
+app.use(helmet.xssFilter());
+
+app.get('/', (req, res) => {
+    res.send('<h1>Hello World</h1>');
+});
+
 
 
 
