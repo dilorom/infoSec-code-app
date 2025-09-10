@@ -2,11 +2,10 @@ const express = require('express');
 const helmet = require('helmet');
 const app = express();
 
-app.use(helmet.hidePoweredBy());
 
 
-
-
+app.use(helmet.hidePoweredBy()); //this is hides origin powdered by in header section.
+app.use(helmet.frameguard({action: 'deny'}));
 
 
 
